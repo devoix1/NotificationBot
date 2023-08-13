@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форма</title>
+</head>
+<body>
+  <form action="/submit" method="post">    
+    <label for="email">Email:</label>
+    <input type="email" name="email" required><br>
+    
+    <label for="paymentMethod">Payment method:</label>
+    <select name="paymentMethod">
+      <option value="Paypal">Paypal</option>
+      <option value="Sepa">Sepa</option>
+    </select><br>
+
+    <label for="plan">Choose plan: </label>
+    <input type="text" name="plan" required><br>
+
+    <input type="hidden" id="client_id" name="id">
+    
+    <input type="submit" value="Отправить">
+  </form>
+
+  <script>
+    function generateUniqueId() {
+        return Date.now().toString() + Math.floor(Math.random() * 10000).toString();
+    }
+
+
+    const inputId = document.querySelector('#client_id');
+    inputId.value = generateUniqueId();
+  </script>
+</body>
+</html>
