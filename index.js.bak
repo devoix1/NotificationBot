@@ -6,8 +6,8 @@ const cors = require('cors'); // Импорт библиотеки cors
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const BOT_TOKEN = '2138500456:AAGnGCZTmcPq-ellie7OXPRBI_Va1qXEpNQ'; // Замените на ваш токен
-const CHAT_ID = '-879099335'; // Замените на ваш chat_id
+const BOT_TOKEN = ''; // Замените на ваш токен
+const CHAT_ID = ''; // Замените на ваш chat_id
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
