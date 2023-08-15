@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const TelegramBot = require('node-telegram-bot-api');
-const cors = require('cors'); // Импорт библиотеки cors
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,12 +14,26 @@ const userRequisites = {};
 const emailLastSent = new Map(); 
 const clients = [];
 
-app.use(cors()); // Использование библиотеки cors
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  //const allowedOrigins = ['http://localhost:5173']; // Массив разрешенных доменов
+  const allowedOrigins = ['https://dmdsoft.site']; // Массив разрешенных доменов
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Content-Type', "application/json")
+  
+  next();
+});
 
 app.post('/submit', (req, res) => {
   const { email, paymentMethod, plan, id } = req.body;
