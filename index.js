@@ -20,8 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use((req, res, next) => {
-  //const allowedOrigins = ['http://localhost:5173']; // Массив разрешенных доменов
-  const allowedOrigins = ['https://dmdsoft.site']; // Массив разрешенных доменов
+  const allowedOrigins = ['https://dmdsoft.site', 'https://notification-dmd-6a3e07075564.herokuapp.com', 'http://127.0.0.1:4040'];
   const origin = req.headers.origin;
 
   if (allowedOrigins.includes(origin)) {
@@ -30,10 +29,11 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Content-Type', "application/json")
+  res.setHeader('Content-Type', "application/json");
   
   next();
 });
+
 
 app.post('/submit', (req, res) => {
   const { email, paymentMethod, plan, id } = req.body;
